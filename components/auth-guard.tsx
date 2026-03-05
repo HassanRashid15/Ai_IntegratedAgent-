@@ -25,6 +25,11 @@ export default function AuthGuard({ children, fallback }: AuthGuardProps) {
 
     async function checkAuth() {
       if (!sb) {
+        // Allow access in demo mode even without Supabase
+        if (demoKey) {
+          setLoading(false);
+          return;
+        }
         setLoading(false);
         return;
       }
